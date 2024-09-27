@@ -3,6 +3,7 @@
 
 #### Technologies include:
 
+- Python
 - Flask
 - HTML
 - Bootstrap
