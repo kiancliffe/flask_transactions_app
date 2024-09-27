@@ -15,12 +15,18 @@ transactions = [
 # Read operation
 @app.route("/")
 def get_transactions():
+    """
+    Returns Home Page
+    """
     return render_template("transactions.html", transactions=transactions)
     
 
 # Create operation
 @app.route('/add', methods=["GET", "POST"])
 def add_transaction():
+    """
+    Gets inputted data from user to create new transaction entry
+    """
     if request.method == 'GET':
         return render_template('form.html')
     
@@ -40,7 +46,9 @@ def add_transaction():
 # Update operation
 @app.route("/edit/<int:transaction_id>", methods=["GET", "POST"])
 def edit_transaction(transaction_id):
-
+    """
+    Gets inputted data from user to update transaction entry
+    """
     if request.method == 'GET':
 
         data_for_form = next((t for t in transactions if t['id'] == transaction_id), None)
@@ -71,7 +79,9 @@ def edit_transaction(transaction_id):
 # Delete operation
 @app.route("/delete/<int:transaction_id>")
 def delete_transaction(transaction_id):
-    
+    """
+    Allows user to delete transaction entry
+    """
     # iterates through transactions to match user passed id to delete entry
     for transaction in transactions:
         if transaction['id'] == transaction_id:
@@ -83,7 +93,9 @@ def delete_transaction(transaction_id):
 
 @app.route("/search", methods=["GET", "POST"])
 def search_transactions():
-    
+    """
+    Allows user to filter transactions by amount
+    """
     if request.method == 'POST':
         # Get min and max calues from search form
         min_amount = float(request.form['min_amount'])
@@ -102,7 +114,9 @@ def search_transactions():
 
 @app.route("/balance")
 def total_balance():
-    
+    """
+    Gets total balance amount for user
+    """
     total : float = 0
 
     for transaction in transactions:
